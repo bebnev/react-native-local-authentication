@@ -1,0 +1,60 @@
+{
+  "name": "rn-local-authentication",
+  "version": "0.0.1",
+  "description": "The library helps you to authenticate users biometrically",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "android/",
+    "ios/",
+    "dist/",
+    "src/",
+    "react-native-local-authentication.podspec"
+  ],
+  "scripts": {
+    "lint": "npx eslint ./ --ignore-pattern node_modules",
+    "ts:check": "npx tsc --noEmit",
+    "build": "rm -rf dist && npx tsc",
+    "project:clean": "cd example && npx react-native-clean-project --keep-node-modules --remove-iOS-build --remove-iOS-pods --remove-android-build --keep-brew --keep-pods && \\rm -fr ios/Pods",
+    "prepare": "yarn build",
+    "dev-sync": "yarn build && cp -r *podspec dist android ios src example/node_modules/rn-local-authentication/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bebnev/react-native-local-authentication.git"
+  },
+  "keywords": [
+    "react-native",
+    "biometry",
+    "local authentication",
+    "authentication",
+    "touch ID",
+    "face ID",
+    "fingerprint",
+    "BiometricPrompt",
+    "biometric",
+    "FingerprintManager"
+  ],
+  "author": "Bebnev Anton <bambr.ab@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bebnev/react-native-local-authentication/issues"
+  },
+  "homepage": "https://github.com/bebnev/react-native-local-authentication#readme",
+  "peerDependencies": {
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "@react-native-community/eslint-config": "^0.0.5",
+    "@types/react": "^16.9.11",
+    "@types/react-native": "^0.60.22",
+    "@typescript-eslint/eslint-plugin": "^2.8.0",
+    "@typescript-eslint/parser": "^2.8.0",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {}
+}
