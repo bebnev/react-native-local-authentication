@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -26,10 +26,33 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import LocalAuthentication from 'rn-local-authentication';
+import LocalAuthentication, {
+  useBiometryStatus,
+  useBiometryAvailability,
+} from 'rn-local-authentication';
 
 const App = () => {
-  console.log(LocalAuthentication);
+  //const status = useBiometryStatus();
+  const isAvailable = useBiometryAvailability();
+
+  console.log(isAvailable);
+  // useEffect(() => {
+  //   LocalAuthentication.isSupportedAsync().then(status => {
+  //     console.log('isSupported --> ', status);
+
+  //     LocalAuthentication.isAvailableAsync().then(st => {
+  //       console.log('isAvailable --> ', st);
+  //     }) ;
+
+  //     LocalAuthentication.getBiometryStatus().then(status => {
+  //       // console.log('biometry status --> ', s);
+  //       // switch(s) {
+  //       //   case
+  //       // }
+  //     });
+  //   }) ;
+  // }, []);
+
   const usingHermes =
     typeof HermesInternal === 'object' && HermesInternal !== null;
   return (

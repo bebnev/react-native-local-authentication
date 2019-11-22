@@ -14,13 +14,26 @@ Inspired by [react-native-fingerprint-scanner](https://github.com/hieuvp/react-n
     - [x] - ios project
     - [ ] - android project
 * [x] - typescript
-* [ ] - API structure
 * [ ] - ios authentication (*need detalization*)
     - Basic functions:
-      - authenticate
-      - isSupported
-      - isAvailable
-      - getBiometryType
+      * [x] - isSupportedAsync(): Promise<boolean>
+      * [x] - isAvailableAsync(): Promise<boolean>
+        * [x] - useBiometryAvailability()
+      * [x] - getBiometryStatus(): Promise<BiometryStatus>
+        * [x] - useBiometryStatus()
+      * [ ] - getBiometryType
+        * [ ] - Biometry.select
+
+```javascript
+
+                Biometry.select({
+                  touchId: {},
+                  faceId: {},
+                  fingerprint?: {}
+                })
+
+```
+  * [ ] authenticate
       - fallback
         - enable/disable
         - change text
@@ -35,3 +48,5 @@ Inspired by [react-native-fingerprint-scanner](https://github.com/hieuvp/react-n
     - getBiometryType
     - BiometryPrompt (experimental namespace)
 * [ ] - readme
+  * [ ] - hooks
+  * [ ] - errors

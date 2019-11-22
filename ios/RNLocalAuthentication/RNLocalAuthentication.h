@@ -12,5 +12,7 @@
 #import <React/RCTBridgeModule.h>
 #endif
 
+#import <LocalAuthentication/LocalAuthentication.h>
+
 @interface RNLocalAuthentication : NSObject <RCTBridgeModule>
 @end
