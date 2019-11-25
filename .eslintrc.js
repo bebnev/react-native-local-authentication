@@ -2,8 +2,8 @@ module.exports = {
     parser:  '@typescript-eslint/parser',
     extends: [
         "@react-native-community",
-        "prettier",
-        "prettier/@typescript-eslint"
+        // "prettier",
+        // "prettier/@typescript-eslint"
     ],
     plugins: ["@typescript-eslint"],
     parserOptions:  {

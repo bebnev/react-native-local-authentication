@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import LocalAuthentication from '../LocalAuthentication/nativeModule';
+import LocalAuthentication from '../LocalAuthentication';
 
 export default function useBiometryAvailability() : boolean | undefined {
     const [isAvailable, setIsAvailable] = useState<boolean | undefined>();

@@ -21,8 +21,8 @@ Inspired by [react-native-fingerprint-scanner](https://github.com/hieuvp/react-n
         * [x] - useBiometryAvailability()
       * [x] - getBiometryStatus(): Promise<BiometryStatus>
         * [x] - useBiometryStatus()
-      * [ ] - getBiometryType
-        * [ ] - Biometry.select
+      * [x] - getBiometryType(): BiometryType
+        * [x] - Biometry.select()
 
 ```javascript
 

@@ -1,4 +1,5 @@
-import LocalAuthentication from './LocalAuthentication/nativeModule';
+import LocalAuthentication from './LocalAuthentication';
 
 export default LocalAuthentication;
-export * from './hooks'
+export * from './hooks';
+export * from './utilities';

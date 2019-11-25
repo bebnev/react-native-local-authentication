@@ -27,8 +27,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import LocalAuthentication, {
-  useBiometryStatus,
   useBiometryAvailability,
+  Biometry,
 } from 'rn-local-authentication';
 
 const App = () => {
@@ -36,22 +36,26 @@ const App = () => {
   const isAvailable = useBiometryAvailability();
 
   console.log(isAvailable);
-  // useEffect(() => {
-  //   LocalAuthentication.isSupportedAsync().then(status => {
-  //     console.log('isSupported --> ', status);
-
-  //     LocalAuthentication.isAvailableAsync().then(st => {
-  //       console.log('isAvailable --> ', st);
-  //     }) ;
-
-  //     LocalAuthentication.getBiometryStatus().then(status => {
-  //       // console.log('biometry status --> ', s);
-  //       // switch(s) {
-  //       //   case
-  //       // }
-  //     });
-  //   }) ;
-  // }, []);
+  console.log(LocalAuthentication.getBiometryType());
+  console.log(
+    Biometry.select({
+      none: 'None text from select',
+      touchId: 'TouchID text from select',
+      faceId: 'FaceID text from select',
+    }),
+  );
+  useEffect(() => {
+    LocalAuthentication.authenticateAsync({
+      reason: 'some reason',
+      fallbackEnabled: true,
+      fallbackTitle: 'my auth',
+      cancelTitle: 'cancel',
+      reuseDuration: 'hello',
+      fallbackToPinCodeAction: true,
+    }).then(response => {
+      console.log(response);
+    });
+  }, []);
 
   const usingHermes =
     typeof HermesInternal === 'object' && HermesInternal !== null;
