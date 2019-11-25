@@ -5,7 +5,7 @@ export interface BiometrySelectSpec<T, F, N> {
     touchId?: T,
     faceId?: F,
     none?: N
-};
+}
 
 /**
  * Select value by current biometry type
@@ -16,7 +16,7 @@ function select<T, F, N>(spec: BiometrySelectSpec<T, F, N>): T | F | N | undefin
     const biometryType = LocalAuthenticationNativeModule.biometryType;
     let key: 'faceId' | 'touchId' | undefined;
 
-    switch(biometryType) {
+    switch (biometryType) {
         case BiometryTypeEnum.FaceID:
             key = 'faceId';
             break;
@@ -29,5 +29,5 @@ function select<T, F, N>(spec: BiometrySelectSpec<T, F, N>): T | F | N | undefin
 }
 
 export const Biometry = {
-    select
-}
+    select,
+};

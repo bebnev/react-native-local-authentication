@@ -22,7 +22,7 @@ export type AuthenticateOptionsIOS = {
      */
     reason: string;
     /**
-     * Flag that enable/disable fallback button in the dialog presented
+     * Flag that enable/disable fallback button in the dialog, presented
      * to the user during authentication.
      */
     fallbackEnabled?: boolean;
@@ -32,7 +32,7 @@ export type AuthenticateOptionsIOS = {
      */
     fallbackTitle?: string;
     /**
-     * Fallbakc user authentication to device passcode
+     * Fallback user authentication to device passcode
      */
     fallbackToPinCodeAction?: boolean;
     /**

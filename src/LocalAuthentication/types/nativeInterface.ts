@@ -38,14 +38,14 @@ export interface LocalAuthenticationNativeModule {
 
 export interface LocalAuthenticationInterface {
     /**
-     * Check if device supports biometry
+     * Checks if device supports biometry
      *
      * @returns Promise<boolean>
      */
     isSupportedAsync: () => Promise<boolean>;
 
     /**
-     * Check if device scanner is available and has no errors
+     * Checks if device scanner is available and has no errors
      *
      * @returns Promise<boolean>
      */
