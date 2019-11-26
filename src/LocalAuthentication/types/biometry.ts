@@ -12,4 +12,5 @@ export type UnexpectedBiometryStatus = {
     description?: string;
 }
 
+// TODO: string with object - looks bad...
 export type BiometryStatus = 'BiometryIsAvailable' | 'BiometryNotAvailable' | 'BiometryNotEnrolled' | 'BiometryLockout' | 'SystemCancel' | 'AppCancel' | 'UserFallback' | 'UserCancel' | 'InvalidContext' | 'PasscodeNotSet' | 'AuthenticationFailed' | UnexpectedBiometryStatus;

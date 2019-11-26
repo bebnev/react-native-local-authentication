@@ -42,6 +42,7 @@ export type AuthenticateOptionsIOS = {
     cancelTitle?:string;
     /**
      * The duration for which Touch ID authentication reuse is allowable.
+     * Duration in seconds.
      */
     reuseDuration?:number;
 }

@@ -22,6 +22,7 @@ Read [Getting Started Guide](docs/Getting-Started.md). If any step seems unclear
 - [Errors](docs/Errors.md)
 - [Versioning](#versioning)
 - [Usage](#usage)
+- [Hooks](docs/Hooks-Reference.md)
 
 ## Versioning
 
