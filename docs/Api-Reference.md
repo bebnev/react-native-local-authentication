@@ -98,9 +98,9 @@ Authorization response fields:
 
 |field|type|description|
 |------|------|------|
-|success|boolean|Show whether Authorization was successful or not|
-|error|string|Authorization Error|
-|errorWarning|string|Last warning from native code|
+|success|boolean|Flag that shows, whether authorization was successful or not|
+|error|string|Authorization Error (optional)|
+|errorWarning|string|Last warning from native code(optional)|
 
 `authenticateAsync` Promise could be rejected when no reason string was set.
 
@@ -111,7 +111,7 @@ Authorization response fields:
 
 #### `select()`
 
-Chooses something from passed in object by current biometry type.
+Chooses something from passed in object by device biometry type.
 
 ```javascript
 
