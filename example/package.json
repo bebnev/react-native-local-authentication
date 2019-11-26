@@ -1,6 +1,6 @@
 {
   "name": "example",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "fresh-install": "rm -rf ios/build android/build $TMPDIR/react-* $TMPDIR/metro-* node_modules && yarn install",
