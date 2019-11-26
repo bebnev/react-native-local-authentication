@@ -1,7 +1,7 @@
 import LocalAuthenticationNativeModule from './nativeModule';
-import { LocalAuthenticationInterface, BiometryType, BiometryTypeEnum } from './types';
+import { LocalAuthenticationInterface, BiometryType, BiometryTypeEnum, AuthenticateOptionsIOS } from './types';
 
-const { isSupportedAsync, isAvailableAsync, getBiometryStatusAsync, biometryType, authenticateAsync } = LocalAuthenticationNativeModule;
+const { isSupportedAsync, isAvailableAsync, getBiometryStatusAsync, biometryType, authenticateAsync: nativeAuthenticateAsync } = LocalAuthenticationNativeModule;
 
 /**
  * Get device supported biometry type
@@ -17,6 +17,21 @@ function getBiometryType(): BiometryType {
         default:
             return 'None';
     }
+}
+
+/**
+ * Authenticate user with their biometrics
+ *
+ * @param options AuthenticateOptionsIOS
+ */
+async function authenticateAsync(options: AuthenticateOptionsIOS) {
+    const response = await nativeAuthenticateAsync(options);
+
+    if (response.warning) {
+        console.warn(response.warning);
+    }
+
+    return response;
 }
 
 export default {

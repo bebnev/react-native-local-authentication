@@ -46,15 +46,19 @@ const App = () => {
   );
   useEffect(() => {
     LocalAuthentication.authenticateAsync({
-      reason: 'some reason',
+      //reason: 'some reason',
       fallbackEnabled: true,
       fallbackTitle: 'my auth',
       cancelTitle: 'cancel',
       reuseDuration: 'hello',
       fallbackToPinCodeAction: true,
-    }).then(response => {
-      console.log(response);
-    });
+    })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(e => {
+        console.log('ERROR --> ', e);
+      });
   }, []);
 
   const usingHermes =
