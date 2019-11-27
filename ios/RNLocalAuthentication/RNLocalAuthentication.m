@@ -150,9 +150,19 @@ RCT_EXPORT_METHOD(authenticateAsync:(NSDictionary *)options
 
 - (NSDictionary *)makeAuthorizationResponse:(BOOL)success withError:(NSError *)error withWarning:(NSString *)warning
 {
+    String *errorDescription = [NSNull null];
+
+    if (error != nil) {
+        errorDescription = [self convertErrorCode:error];
+
+        if (errorDescription == nil) {
+            errorDescription = [NSString stringWithFormat:@"%d", error.code]
+        }
+    }
+
     return @{
         @"success": [NSNumber numberWithBool:success],
-        @"error": error == nil ? [NSNull null] : [self convertErrorCode:error],
+        @"error": errorDescription,
         @"warning": RCTNullIfNil(warning)
     };
 }

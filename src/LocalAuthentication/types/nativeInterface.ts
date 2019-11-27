@@ -1,7 +1,10 @@
 import { BiometryTypeEnum, BiometryStatus, BiometryType } from './biometry';
-import { AuthenticateResponse, AuthenticateOptionsIOS } from './authentication';
+import {
+    AuthenticateResponse,
+    AuthenticateOptions,
+} from './authentication';
 
-export interface LocalAuthenticationNativeModule {
+export interface LocalAuthenticationNativeModuleDefault {
     /**
      * Type of the biometry available on device
      */
@@ -31,10 +34,18 @@ export interface LocalAuthenticationNativeModule {
     /**
      * Authenticate user with their biometrics
      *
-     * @param AuthenticateOptionsIOS options
+     * @param AuthenticateOptions options
      */
-    authenticateAsync: (options: AuthenticateOptionsIOS) => Promise<AuthenticateResponse>;
+    authenticateAsync: (options: AuthenticateOptions) => Promise<AuthenticateResponse>;
 }
+
+export interface LocalAuthenticationNativeModuleAndroid extends LocalAuthenticationNativeModuleDefault {
+    release: () => void;
+}
+
+export type LocalAuthenticationNativeModuleIOS = LocalAuthenticationNativeModuleDefault;
+
+export type LocalAuthenticationNativeModule = LocalAuthenticationNativeModuleIOS & LocalAuthenticationNativeModuleAndroid;
 
 export interface LocalAuthenticationInterface {
     /**
@@ -68,7 +79,12 @@ export interface LocalAuthenticationInterface {
     /**
      * Authenticate user with their biometrics
      *
-     * @param AuthenticateOptionsIOS options
+     * @param AuthenticateOptionsIOS | AuthenticateOptionsAndroid options
      */
-    authenticateAsync: (options: AuthenticateOptionsIOS) => Promise<AuthenticateResponse>;
+    authenticateAsync: (options: AuthenticateOptions) => Promise<AuthenticateResponse>;
+
+    /**
+     * Release memory
+     */
+    release: () => void;
 }

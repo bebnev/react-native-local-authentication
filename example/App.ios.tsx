@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -46,11 +46,11 @@ const App = () => {
   );
   useEffect(() => {
     LocalAuthentication.authenticateAsync({
-      //reason: 'some reason',
+      reason: 'some reason',
       fallbackEnabled: true,
       fallbackTitle: 'my auth',
       cancelTitle: 'cancel',
-      reuseDuration: 'hello',
+      reuseDuration: 300,
       fallbackToPinCodeAction: true,
     })
       .then(response => {
@@ -62,7 +62,7 @@ const App = () => {
   }, []);
 
   const usingHermes =
-    typeof HermesInternal === 'object' && HermesInternal !== null;
+    typeof HermesInternal === 'object' && HermesInternal !== null;//eslint-disable-line
   return (
     <>
       <StatusBar barStyle="dark-content" />
