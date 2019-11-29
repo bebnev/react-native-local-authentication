@@ -1,2 +1,7 @@
-# generated files by bob
 dist/
+*.md
+ios
+android
+node_modules
+*.md
+docs/

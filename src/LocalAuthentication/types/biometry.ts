@@ -1,10 +1,9 @@
-export type BiometryType = 'TouchID' | 'FaceID' | 'Fingerprint' | 'None';
+export type BiometryTypeIOS = 'TouchID' | 'FaceID' | 'None';
 
-export enum BiometryTypeEnum {
+export enum BiometryTypeIOSEnum {
     None = 0,
     TouchID = 1,
     FaceID = 2,
-    Fingerprint = 3,
     Unknown = -1
 }
 
@@ -28,12 +27,12 @@ export type BiometryStatusDefault = 'BiometryIsAvailable'
 
 export type BiometryStatusIOS = BiometryStatusDefault;
 
-export type BiometryStatusAndroid = BiometryStatusDefault | 'BiometryTemporaryNotAvailable'
+export type BiometryStatusAndroid = BiometryStatusDefault & ('BiometryTemporaryNotAvailable'
     | 'BiometryTemporaryLockout'
     | 'NoSpace'
     | 'Timeout'
     | 'UnableToProcess'
-    | 'UnexpectedVendorError'
+    | 'UnexpectedVendorError');
 
 // TODO: string with object - looks bad...
 export type BiometryStatus = BiometryStatusIOS & BiometryStatusAndroid;

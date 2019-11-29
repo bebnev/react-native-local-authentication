@@ -17,37 +17,37 @@ export type AuthenticateResponse = {
 
 export type AuthenticateOptionsDefault = {
     /**
-     * The app-provided reason for requesting authentication, which displays
+     * The app-provided reason (for Android: subtitle) for requesting authentication, which displays
      * in the authentication dialog presented to the user
      */
     reason: string;
     /**
-     * Flag that enable/disable fallback button in the dialog, presented
+     * Flag that enable/disable fallback button (action in case of Android) in the dialog, presented
      * to the user during authentication.
      */
     fallbackEnabled?: boolean;
     /**
-     * The localized title for the fallback button in the dialog presented
-     * to the user during authentication.
-     */
-    fallbackTitle?: string;
-    /**
-     * Fallback user authentication to device passcode
+     * Fallback user authentication to device passcode, password
      */
     fallbackToPinCodeAction?: boolean;
-    /**
-     * The duration for which Touch ID authentication reuse is allowable.
-     * Duration in seconds.
-     */
-    reuseDuration?:number;
-}
-
-export type AuthenticateOptionsIOS = AuthenticateOptionsDefault & {
     /**
      * The localized title for the cancel button in the dialog presented
      * to the user during authentication.
      */
     cancelTitle?:string;
+}
+
+export type AuthenticateOptionsIOS = AuthenticateOptionsDefault & {
+    /**
+     * The duration for which Touch ID authentication reuse is allowable.
+     * Duration in seconds.
+     */
+    reuseDuration?:number;
+    /**
+     * The localized title for the fallback button in the dialog presented
+     * to the user during authentication.
+     */
+    fallbackTitle?: string;
 };
 
 export type AuthenticateOptionsAndroid = AuthenticateOptionsDefault & {
@@ -56,7 +56,7 @@ export type AuthenticateOptionsAndroid = AuthenticateOptionsDefault & {
      */
     title?: string;
     /**
-     * Set the description to display in biometry dialog.
+     * The app-provided description for biometry dialog.
      */
     description?: string;
     /**
@@ -67,5 +67,3 @@ export type AuthenticateOptionsAndroid = AuthenticateOptionsDefault & {
      */
     cancelTitle?:string;
 };
-
-export type AuthenticateOptions = AuthenticateOptionsIOS & AuthenticateOptionsAndroid;

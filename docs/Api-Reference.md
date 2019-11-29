@@ -62,15 +62,17 @@ LocalAuthentication.isAvailableAsync().then(isAvailable => {
 API is available with [`useBiometryAvailability hook`](Hooks-Reference.md#usebiometryavailability)
 
 
-#### `getBiometryType()`
+#### `getBiometryType()` (iOS only)
 
-Gets device Biometry type.
+Method returns biometry type available on the device. Method works only for iOS. Android API does not tell work type of biometry you are working with.
+
+This method is safe to call at Android, it will return `null`.
 
 This method is synchronous.
 
 ```javascript
 
-type BiometryType = 'TouchID' | 'FaceID' | 'Fingerprint' | 'None';
+type BiometryTypeIOS = 'TouchID' | 'FaceID' | 'None';
 
 LocalAuthentication.getBiometryType(): BiometryType;
 
@@ -83,7 +85,6 @@ LocalAuthentication.getBiometryType(): BiometryType;
 const biometryType = LocalAuthentication.getBiometryType();
 // TouchID
 // FaceID
-// Fingerprint
 // None
 
 ```
@@ -135,8 +136,18 @@ type AuthenticateOptionsIOS = {
     cancelTitle?:string;
     reuseDuration?:number;
 }
+type AuthenticateOptionsAndroid = {
+    reason: string;
+    fallbackEnabled?: boolean;
+    fallbackTitle?: string;
+    fallbackToPinCodeAction?: boolean;
+    cancelTitle?:string;
+    title?: string;
+    description?: string;
+}
 
-LocalAuthentication.authenticateAsync(options: AuthenticateOptionsIOS): Promise<AuthenticateResponse>;
+
+LocalAuthentication.authenticateAsync(options: AuthenticateOptionsIOS | AuthenticateOptionsAndroid): Promise<AuthenticateResponse>;
 
 ```
 
@@ -146,12 +157,14 @@ Authentication Request options list:
 
 |key|type|required|description|iOS|Android|
 |------|------|------|------|------|------|
-|reason|string|yes|The app-provided reason for requesting authentication, which displays in the authentication dialog presented to the user|✔️||
-|fallbackEnabled|boolean|no|Flag that enable/disable fallback button in the dialog, presented to the user during authentication.|✔️||
-|fallbackTitle|boolean|no|The localized title for the fallback button in the dialog presented to the user during authentication.|✔️||
-|fallbackToPinCodeAction|boolean|no|Fallback user authentication to device passcode|||
-|cancelTitle|string|no|The localized title for the cancel button in the dialog presented to the user during authentication.|✔️||
-|reuseDuration|number|no|The duration for which Touch ID authentication reuse is allowable.|✔️||
+|reason|string|yes|The app-provided reason (for Android: subtitle) for requesting authentication, which displays in the authentication dialog presented to the user.|✅|✅|
+|fallbackEnabled|boolean|no|Flag that enable/disable fallback button (action in case of Android) in the dialog, presented to the user during authentication.|✅|✅|
+|fallbackTitle|boolean|no|The localized title for the fallback button in the dialog presented to the user during authentication.|✅|❌|
+|fallbackToPinCodeAction|boolean|no|Fallback user authentication to device passcode, password|✅|✅|
+|cancelTitle|string|**iOS** - no<br/>**Android** - yes (if `fallbackToPinCodeAction` is not set to true)|The localized title for the cancel button in the dialog presented to the user during authentication. **Android only** - Cancel title should not be set if `fallbackToPinCodeAction` is set to true.|✅|✅|
+|reuseDuration|number|no|The duration for which Touch ID authentication reuse is allowable.|✅|❌|
+|title|string|no (Default: Biometric Login)|The app-provided title for biometry dialog. Default is - Biometric Login|❌|✅|
+|description|string|no|The app-provided description for biometry dialog.|❌|✅|
 
 Authorization response fields:
 
@@ -161,7 +174,11 @@ Authorization response fields:
 |error|string|Authorization Error (optional)|
 |errorWarning|string|Last warning from native code(optional)|
 
-`authenticateAsync` Promise could be rejected when no reason string was set.
+`authenticateAsync` Promise could be rejected:
+ - **iOS** - when no reason string was set;
+ - **Android** - when no reason string was set;
+ - **Android** - when nor `cancelTitle` and `fallbackToPinCodeAction` were set (one of them is important)
+ - **Android** - when `cancelTitle` and `fallbackToPinCodeAction` (true) were set
 
 **Examples**
 
@@ -225,6 +242,10 @@ const authenticationStatus = await LocalAuthentication.authenticateAsync({
 
 Chooses something from passed in object by device biometry type.
 
+**Android** 
+
+There is no way to determine biometry sensor that was used to authenticate user, so key `android` is used for `select` function. 
+
 ```javascript
 
 Biometry.select({
@@ -234,8 +255,8 @@ Biometry.select({
     faceId: {
         color: 'blue'
     },
-    fingerprint: {
-        color: 'black'
+    android: {
+      color: 'yellow'
     },
     none: {
         color: 'white'

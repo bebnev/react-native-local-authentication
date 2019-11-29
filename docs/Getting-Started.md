@@ -61,7 +61,7 @@ class MyComponent extends React.Component {
     }
 
     render() {
-        return <AnotherComponent />
+        return (<AnotherComponent />);
     }
 }
 

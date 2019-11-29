@@ -2,14 +2,14 @@
 
 The library helps you to authenticate users biometrically.
 
-Inspired by [react-native-fingerprint-scanner](https://github.com/hieuvp/react-native-fingerprint-scanner)
+Inspired by [react-native-fingerprint-scanner](https://github.com/hieuvp/react-native-fingerprint-scanner) and Android [BiometricPrompt](https://developer.android.com/reference/androidx/biometric/BiometricPrompt.html) class that manages a system-provided biometric prompt.
 
 **Under construction**
 
 ## Platforms Supported
 
 - [x] iOS
-- [ ] Android
+- [x] Android
 
 ## Getting Started
 
@@ -29,18 +29,16 @@ Read [Getting Started Guide](docs/Getting-Started.md). If any step seems unclear
 **Breaking History:**
 
 - 0.0.1 - iOS authorization
+- 0.0.4 - Android authorization
 
 **Upcoming:**
 
-- [ ] android basic authorization flow (FingerprintAPI)
 - [ ] documentation
   - [ ] android installation details
   - [ ] ios examples
   - [ ] android examples
-- [ ] android beta authorization flow (BiometryPrompt)
 
 - [ ] may be check faceID permissions
-- [ ] may be write basic component for Android FingerprintAPI
 
 ## Usage
 
@@ -51,8 +49,8 @@ Import `LocalAuthentication` from `rn-local-authentication` and use it like so:
 ```javascript
 
 import React from 'react';
-import {View} from 'react-native';
-import LocatAuthentication from 'rn-local-authentication';
+import { View } from 'react-native';
+import LocalAuthentication from 'rn-local-authentication';
 
 // ...
 class MyComponent extends React.Component {

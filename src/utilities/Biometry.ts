@@ -1,10 +1,12 @@
+import { Platform } from 'react-native';
 import LocalAuthenticationNativeModule from '../LocalAuthentication/nativeModule';
-import { BiometryTypeEnum } from '../LocalAuthentication/types';
+import { BiometryTypeIOSEnum } from '../LocalAuthentication/types';
 
-export interface BiometrySelectSpec<T, F, N> {
+export interface BiometrySelectSpec<T, F, N, A> {
     touchId?: T,
     faceId?: F,
-    none?: N
+    none?: N,
+    android?: A
 }
 
 /**
@@ -12,15 +14,19 @@ export interface BiometrySelectSpec<T, F, N> {
  *
  * @param spec
  */
-function select<T, F, N>(spec: BiometrySelectSpec<T, F, N>): T | F | N | undefined {
+function select<T, F, N, A>(spec: BiometrySelectSpec<T, F, N, A>): T | F | N | A | undefined {
+    if (Platform.OS === 'android') {
+        return spec.android;
+    }
+
     const biometryType = LocalAuthenticationNativeModule.biometryType;
     let key: 'faceId' | 'touchId' | undefined;
 
     switch (biometryType) {
-        case BiometryTypeEnum.FaceID:
+        case BiometryTypeIOSEnum.FaceID:
             key = 'faceId';
             break;
-        case BiometryTypeEnum.TouchID:
+        case BiometryTypeIOSEnum.TouchID:
             key = 'touchId';
             break;
     }

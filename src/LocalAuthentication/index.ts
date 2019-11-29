@@ -2,10 +2,10 @@ import { Platform } from 'react-native';
 import LocalAuthenticationNativeModule from './nativeModule';
 import {
     LocalAuthenticationInterface,
-    BiometryType,
-    BiometryTypeEnum,
+    BiometryTypeIOS,
+    BiometryTypeIOSEnum,
     AuthenticateOptionsIOS,
-    AuthenticateResponse,
+    AuthenticateResponse, AuthenticateOptionsAndroid,
 } from './types';
 
 const { isSupportedAsync, isAvailableAsync, getBiometryStatusAsync, biometryType, authenticateAsync: nativeAuthenticateAsync } = LocalAuthenticationNativeModule;
@@ -13,13 +13,17 @@ const { isSupportedAsync, isAvailableAsync, getBiometryStatusAsync, biometryType
 /**
  * Get device supported biometry type
  *
- * @returns BiometryType
+ * @returns BiometryTypeIOS | null
  */
-function getBiometryType(): BiometryType {
+function getBiometryType(): BiometryTypeIOS | null {
+    if (Platform.OS === 'android') {
+        return null;
+    }
+
     switch (biometryType) {
-        case BiometryTypeEnum.FaceID:
+        case BiometryTypeIOSEnum.FaceID:
             return 'FaceID';
-        case BiometryTypeEnum.TouchID:
+        case BiometryTypeIOSEnum.TouchID:
             return 'TouchID';
         default:
             return 'None';
@@ -32,7 +36,7 @@ function getBiometryType(): BiometryType {
  * @param options AuthenticateOptionsIOS
  * @return Promise<AuthenticateResponse>
  */
-async function authenticateAsync(options: AuthenticateOptionsIOS): Promise<AuthenticateResponse> {
+async function authenticateAsync(options: AuthenticateOptionsIOS | AuthenticateOptionsAndroid): Promise<AuthenticateResponse> {
     const response: AuthenticateResponse = await nativeAuthenticateAsync(options);
 
     if (response.warning) {
@@ -45,12 +49,12 @@ async function authenticateAsync(options: AuthenticateOptionsIOS): Promise<Authe
 /**
  * Release memory (for android)
  */
-function release() {
+function release(): void {
     if (Platform.OS === 'android') {
-        LocalAuthenticationNativeModule.release();
+        return LocalAuthenticationNativeModule.release();
     }
 
-    return null;
+    return;
 }
 
 export default {

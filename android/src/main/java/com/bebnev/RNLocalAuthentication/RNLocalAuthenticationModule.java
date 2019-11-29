@@ -103,6 +103,9 @@ public class RNLocalAuthenticationModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void authenticateAsync(ReadableMap options, final Promise p) {
+        boolean fallbackEnabled = options.hasKey("fallbackEnabled") && !options.isNull("fallbackEnabled")
+                    ? options.getBoolean("fallbackEnabled")
+                    : false;
         Log.w(LOG_TAG, "AUTHENTICATE OPTIONS --> " + options.toString());
 
         if (!options.hasKey("reason") || options.isNull("reason")) {
@@ -116,6 +119,8 @@ public class RNLocalAuthenticationModule extends ReactContextBaseJavaModule {
             return;
         }
 
+        // TODO: cancel title && fallbackToPinCodeAction
+
         biometricPrompt = new BiometricPrompt((FragmentActivity) getCurrentActivity(),
                 executor, new BiometricPrompt.AuthenticationCallback() {
 
@@ -126,8 +131,12 @@ public class RNLocalAuthenticationModule extends ReactContextBaseJavaModule {
                 if (errorCode == ERROR_NEGATIVE_BUTTON && biometricPrompt != null) {
                     biometricPrompt.cancelAuthentication();
                     release();
+                } else if (errorCode == ERROR_USER_CANCELED && !fallbackEnabled && biometricPrompt != null ) {
+                    biometricPrompt.cancelAuthentication();
+                    p.resolve(makeAuthorizationResponse(false, BiometricPrompt.ERROR_NEGATIVE_BUTTON));
+                    release();
+                    return;
                 }
-                // TODO: fallbackEnabled!!!
 
                 p.resolve(makeAuthorizationResponse(false, errorCode));
             }

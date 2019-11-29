@@ -1,15 +1,9 @@
-import { BiometryTypeEnum, BiometryStatus, BiometryType } from './biometry';
+import { BiometryTypeIOSEnum, BiometryStatus, BiometryTypeIOS } from './biometry';
 import {
-    AuthenticateResponse,
-    AuthenticateOptions,
+    AuthenticateResponse, AuthenticateOptionsIOS, AuthenticateOptionsAndroid,
 } from './authentication';
 
 export interface LocalAuthenticationNativeModuleDefault {
-    /**
-     * Type of the biometry available on device
-     */
-    biometryType: BiometryTypeEnum;
-
     /**
      * Check if device supports biometry
      *
@@ -34,16 +28,21 @@ export interface LocalAuthenticationNativeModuleDefault {
     /**
      * Authenticate user with their biometrics
      *
-     * @param AuthenticateOptions options
+     * @param AuthenticateOptionsIOS | AuthenticateOptionsAndroid options
      */
-    authenticateAsync: (options: AuthenticateOptions) => Promise<AuthenticateResponse>;
+    authenticateAsync: (options: AuthenticateOptionsIOS | AuthenticateOptionsAndroid) => Promise<AuthenticateResponse>;
 }
 
 export interface LocalAuthenticationNativeModuleAndroid extends LocalAuthenticationNativeModuleDefault {
     release: () => void;
 }
 
-export type LocalAuthenticationNativeModuleIOS = LocalAuthenticationNativeModuleDefault;
+export interface LocalAuthenticationNativeModuleIOS extends LocalAuthenticationNativeModuleDefault {
+    /**
+     * Type of the biometry available on device
+     */
+    biometryType: BiometryTypeIOSEnum;
+}
 
 export type LocalAuthenticationNativeModule = LocalAuthenticationNativeModuleIOS & LocalAuthenticationNativeModuleAndroid;
 
@@ -72,16 +71,16 @@ export interface LocalAuthenticationInterface {
     /**
      * Get Biometry type
      *
-     * @returns BiometryType
+     * @returns BiometryTypeIOS | null
      */
-    getBiometryType: () => BiometryType;
+    getBiometryType: () => BiometryTypeIOS | null;
 
     /**
      * Authenticate user with their biometrics
      *
      * @param AuthenticateOptionsIOS | AuthenticateOptionsAndroid options
      */
-    authenticateAsync: (options: AuthenticateOptions) => Promise<AuthenticateResponse>;
+    authenticateAsync: (options: AuthenticateOptionsIOS | AuthenticateOptionsAndroid) => Promise<AuthenticateResponse>;
 
     /**
      * Release memory
