@@ -58,12 +58,7 @@ RCT_EXPORT_METHOD(getBiometryStatusAsync:(RCTPromiseResolveBlock)resolve rejecte
         if (errorDescription != nil) {
             resolve(errorDescription);
         } else {
-            NSDictionary *unexpectedError = @{
-                @"code": [NSString stringWithFormat:@"%ld", (long) error.code],
-                @"description": [NSString stringWithFormat:@"%@", error.localizedDescription]
-            };
-
-            resolve(unexpectedError);
+            resolve([NSString stringWithFormat:@"%ld - %@", (long) error.code, error.localizedDescription]);
         }
     }
 }
@@ -150,13 +145,13 @@ RCT_EXPORT_METHOD(authenticateAsync:(NSDictionary *)options
 
 - (NSDictionary *)makeAuthorizationResponse:(BOOL)success withError:(NSError *)error withWarning:(NSString *)warning
 {
-    String *errorDescription = [NSNull null];
+    NSString *errorDescription;
 
     if (error != nil) {
         errorDescription = [self convertErrorCode:error];
 
         if (errorDescription == nil) {
-            errorDescription = [NSString stringWithFormat:@"%d", error.code]
+            errorDescription = [NSString stringWithFormat:@"%ld: %@", (long) error.code, error.localizedDescription];
         }
     }
 
@@ -230,7 +225,6 @@ RCT_EXPORT_METHOD(authenticateAsync:(NSDictionary *)options
             return @"AuthenticationFailed";
         default:
             return nil;
-            //return [@"unknown: " stringByAppendingFormat:@"%ld, %@", (long) error, error.localizedDescription];
     }
 }
 

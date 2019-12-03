@@ -1,6 +1,5 @@
 package com.bebnev.RNLocalAuthentication;
 
-import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.biometric.BiometricPrompt;
@@ -23,7 +22,6 @@ import com.facebook.react.bridge.Arguments;
 public class RNLocalAuthenticationModule extends ReactContextBaseJavaModule {
     public static final String NAME = "RNLocalAuthentication";
 
-    private static final String LOG_TAG = "RNLocalAuthentication";
     private static  final int AUTHORIZATION_FAILED = 9999;
     private Executor executor = new MainThreadExecutor();
     private BiometricPrompt biometricPrompt = null;
@@ -86,12 +84,7 @@ public class RNLocalAuthenticationModule extends ReactContextBaseJavaModule {
             if (errorDescription != null) {
                 p.resolve(errorDescription);
             } else {
-                WritableMap map = Arguments.createMap();
-
-                map.putString("code", String.valueOf(status));
-                map.putString("description", "");
-
-                p.resolve(map);
+                p.resolve(String.valueOf(status));
             }
         }
     }
@@ -107,7 +100,6 @@ public class RNLocalAuthenticationModule extends ReactContextBaseJavaModule {
         final boolean fallbackEnabled = options.hasKey("fallbackEnabled") && !options.isNull("fallbackEnabled")
                     ? options.getBoolean("fallbackEnabled")
                     : false;
-        Log.w(LOG_TAG, "AUTHENTICATE OPTIONS --> " + options.toString());
 
         if (!options.hasKey("reason") || options.isNull("reason")) {
             p.reject("RNLocalAuthorizationNoReason", "Reason for requesting authentication is not specified"); // TODO: naming collisions
@@ -191,7 +183,8 @@ public class RNLocalAuthenticationModule extends ReactContextBaseJavaModule {
         WritableMap map = Arguments.createMap();
 
         map.putBoolean("success", success);
-        map.putString("errorCode", error);
+        map.putString("error", error);
+        map.putString("warning", "");
 
         return map;
     }

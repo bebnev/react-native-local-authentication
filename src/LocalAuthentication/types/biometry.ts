@@ -7,11 +7,6 @@ export enum BiometryTypeIOSEnum {
     Unknown = -1
 }
 
-export type UnexpectedBiometryStatus = {
-    code: string;
-    description?: string;
-}
-
 export type BiometryStatusDefault = 'BiometryIsAvailable'
     | 'BiometryNotAvailable'
     | 'BiometryNotEnrolled'
@@ -22,8 +17,7 @@ export type BiometryStatusDefault = 'BiometryIsAvailable'
     | 'UserCancel'
     | 'InvalidContext'
     | 'PasscodeNotSet'
-    | 'AuthenticationFailed'
-    | UnexpectedBiometryStatus;
+    | 'AuthenticationFailed';
 
 export type BiometryStatusIOS = BiometryStatusDefault;
 
@@ -34,5 +28,4 @@ export type BiometryStatusAndroid = BiometryStatusDefault & ('BiometryTemporaryN
     | 'UnableToProcess'
     | 'UnexpectedVendorError');
 
-// TODO: string with object - looks bad...
 export type BiometryStatus = BiometryStatusIOS & BiometryStatusAndroid;

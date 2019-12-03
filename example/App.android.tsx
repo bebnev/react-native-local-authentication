@@ -26,7 +26,9 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import LocalAuthentication from 'rn-local-authentication';
+import LocalAuthentication, {
+  getBiometryStatusDescription,
+} from 'rn-local-authentication';
 
 const App = () => {
   LocalAuthentication.isSupportedAsync().then(st =>
@@ -48,6 +50,7 @@ const App = () => {
     })
       .then(result => {
         console.log('Authentication result --> ', result);
+        console.log(getBiometryStatusDescription(result.error));
       })
       .catch(e => {
         console.log('Authentication error -->', e);
