@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.biometric.BiometricPrompt;
 import androidx.biometric.BiometricManager;
 import static androidx.biometric.BiometricConstants.ERROR_NEGATIVE_BUTTON;
+import static androidx.biometric.BiometricConstants.ERROR_USER_CANCELED;
 import java.util.concurrent.Executor;
 
 import com.facebook.react.bridge.ReadableMap;
@@ -103,7 +104,7 @@ public class RNLocalAuthenticationModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void authenticateAsync(ReadableMap options, final Promise p) {
-        boolean fallbackEnabled = options.hasKey("fallbackEnabled") && !options.isNull("fallbackEnabled")
+        final boolean fallbackEnabled = options.hasKey("fallbackEnabled") && !options.isNull("fallbackEnabled")
                     ? options.getBoolean("fallbackEnabled")
                     : false;
         Log.w(LOG_TAG, "AUTHENTICATE OPTIONS --> " + options.toString());
