@@ -3,12 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "fresh-install": "rm -rf ios/build android/build $TMPDIR/react-* $TMPDIR/metro-* node_modules && yarn install",
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
-    "test": "jest",
-    "fresh:run": "cd ../ && yarn dev:sync && cd ./example && npx react-native run-ios"
+    "fresh:install": "rm -rf ios/build android/build $TMPDIR/react-* $TMPDIR/metro-* node_modules && yarn install",
+    "dev:sync": "cd ../ && yarn dev:sync && cd ./example"
   },
   "dependencies": {
     "react": "16.9.0",
@@ -19,25 +15,9 @@
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
-    "@types/jest": "^24.0.18",
     "@types/react-native": "^0.60.22",
     "@types/react-test-renderer": "16.9.0",
-    "babel-jest": "^24.9.0",
-    "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
-    "react-test-renderer": "16.9.0",
-    "typescript": "^3.6.3",
-    "@types/rn-local-authentication": "file:.."
-  },
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "react-test-renderer": "16.9.0"
   }
 }

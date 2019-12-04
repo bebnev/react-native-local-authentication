@@ -75,7 +75,7 @@ RCT_EXPORT_METHOD(authenticateAsync:(NSDictionary *)options
 
     // TODO: may be create authorization response type, same as for resolve ???
     if (reason == nil || [reason length] == 0) {
-        return reject(@"RNLocalAuthorizationNoReason", @"Reason for requesting authentication is not specified", nil);
+        return reject(@"ReasonNotSet", @"Reason for requesting authentication is not specified", nil);
     }
 
     // TODO: check this out
@@ -157,7 +157,7 @@ RCT_EXPORT_METHOD(authenticateAsync:(NSDictionary *)options
 
     return @{
         @"success": [NSNumber numberWithBool:success],
-        @"error": errorDescription,
+        @"error": RCTNullIfNil(errorDescription),
         @"warning": RCTNullIfNil(warning)
     };
 }

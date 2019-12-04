@@ -34,6 +34,10 @@ export const getBiometryStatusDescription = (code: BiometryStatus) => {
             return 'Error state returned when the sensor was unable to process the current image';
         case 'UnexpectedVendorError':
             return 'Hardware vendors may extend this list if there are conditions that do not fall under one of the above categories. Vendors are responsible for providing error strings for these errors. These messages are typically reserved for internal operations such as enrollment, but may be used to express vendor errors not otherwise covered. Applications are expected to show the error message string if they happen, but are advised not to rely on the message id since they will be device and vendor-specific';
+        case 'ReasonNotSet':
+            return 'Reason for requesting authentication is not specified';
+        case 'CancelTitleNotSet':
+            return 'Android. Cancel button text must be set and non-empty';
         default:
             return code;
     }

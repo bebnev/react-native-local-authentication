@@ -20,5 +20,7 @@
 |Timeout|Error state returned when the current request has been running too long. This is intended to<br/>prevent programs from waiting for the biometric sensor indefinitely. The timeout is platform<br/>and sensor-specific, but is generally on the order of 30 seconds.|❌|✅|
 |UnableToProcess|Error state returned when the sensor was unable to process the current image.|❌|✅|
 |UnexpectedVendorError|Hardware vendors may extend this list if there are conditions that do not fall under one of <br />the above categories. Vendors are responsible for providing error strings for these errors.<br/>These messages are typically reserved for internal operations such as enrollment, but may be<br/>used to express vendor errors not otherwise covered. Applications are expected to show the<br/>error message string if they happen, but are advised not to rely on the message id since they<br/>will be device and vendor-specific|❌|✅|
+|ReasonNotSet|The app-provided reason (for Android: subtitle) for requesting authentication, was not set|✅|✅|
+|CancelTitleNotSet|The localized title for the negative button in the dialog presented to the user during authentication. Negative button text should not be set if `fallbackToPinCodeAction` is set to true.|❌|✅|
 
 For more, read the [API Reference](docs/Api-Reference.md).

@@ -37,6 +37,13 @@ function getBiometryType(): BiometryTypeIOS | null {
  * @return Promise<AuthenticateResponse>
  */
 async function authenticateAsync(options: AuthenticateOptionsIOS | AuthenticateOptionsAndroid): Promise<AuthenticateResponse> {
+    if (Platform.OS === 'android') {
+        if (!options.cancelTitle && !options.fallbackToPinCodeAction) {
+            options.cancelTitle = 'Cancel';
+        } else if (options.cancelTitle && options.fallbackToPinCodeAction) {
+            options.cancelTitle = undefined;
+        }
+    }
     const response: AuthenticateResponse = await nativeAuthenticateAsync(options);
 
     if (response.warning) {

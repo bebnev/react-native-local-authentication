@@ -1,6 +1,6 @@
 # React Native Local Authentication
 
-The library helps you to authenticate users biometrically.
+The library helps you to authenticate users biometrically natively on both iOS and Android devices.
 
 Inspired by [react-native-fingerprint-scanner](https://github.com/hieuvp/react-native-fingerprint-scanner) and Android [BiometricPrompt](https://developer.android.com/reference/androidx/biometric/BiometricPrompt.html) class that manages a system-provided biometric prompt.
 

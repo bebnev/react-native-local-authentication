@@ -14,6 +14,7 @@ This reference lays out the current public methods for the React Native LocalAut
 
 - [`Biometry`](Api-Reference.md#biometry)
   - [`select`](Api-reference.md#select)
+- [`getBiometryStatusDescription`](Api-Reference.md#getbiometrystatusdescription)
 
 ## Reference
 
@@ -242,9 +243,9 @@ const authenticationStatus = await LocalAuthentication.authenticateAsync({
 
 Chooses something from passed in object by device biometry type.
 
-**Android** 
+**Android**
 
-There is no way to determine biometry sensor that was used to authenticate user, so key `android` is used for `select` function. 
+There is no way to determine biometry sensor that was used to authenticate user, so key `android` is used for `select` function.
 
 ```javascript
 
@@ -262,5 +263,21 @@ Biometry.select({
         color: 'white'
     }
 })
+
+```
+
+### getBiometryStatusDescription()
+
+Get some default description of the biometry status. If description is not found then status is returned back.
+
+**Examples**
+
+```javascript
+
+import LocalAuthentication, {getBiometryStatusDescription} from "rn-local-authentication";
+
+const status = await LocalAuthentication.getBiometryStatusAsync();
+
+const description = getBiometryStatusDescription(status);
 
 ```

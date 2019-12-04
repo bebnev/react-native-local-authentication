@@ -102,17 +102,15 @@ public class RNLocalAuthenticationModule extends ReactContextBaseJavaModule {
                     : false;
 
         if (!options.hasKey("reason") || options.isNull("reason")) {
-            p.reject("RNLocalAuthorizationNoReason", "Reason for requesting authentication is not specified"); // TODO: naming collisions
+            p.reject("ReasonNotSet", "Reason for requesting authentication is not specified");
             return;
         }
 
         if ((!options.hasKey("cancelTitle") || options.isNull("cancelTitle"))
                 && (!options.hasKey("fallbackToPinCodeAction") || options.isNull("fallbackToPinCodeAction"))) {
-            p.reject("RNLocalAuthorizationNoCancelButtonText", "Cancel button text must be set and non-empty");// TODO: naming collisions
+            p.reject("CancelTitleNotSet", "Cancel button text must be set and non-empty");
             return;
         }
-
-        // TODO: cancel title && fallbackToPinCodeAction
 
         biometricPrompt = new BiometricPrompt((FragmentActivity) getCurrentActivity(),
                 executor, new BiometricPrompt.AuthenticationCallback() {
@@ -146,7 +144,7 @@ public class RNLocalAuthenticationModule extends ReactContextBaseJavaModule {
             public void onAuthenticationFailed() {
                 super.onAuthenticationFailed();
 
-                p.resolve(makeAuthorizationResponse(false, AUTHORIZATION_FAILED));
+                // p.resolve(makeAuthorizationResponse(false, AUTHORIZATION_FAILED));
             }
         });
 
