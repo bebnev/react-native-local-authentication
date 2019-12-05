@@ -66,7 +66,6 @@ const App = () => {
           LocalAuthentication.authenticateAsync({
             reason: 'Authenticate me please',
           }).then(response => {
-            console.log(response);
             dispatchAuth({type: 'auth.finish', payload: response})
           }).catch(e => {
             dispatchAuth({type: 'auth.error', payload: e.message});
