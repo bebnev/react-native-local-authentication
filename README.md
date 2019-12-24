@@ -1,6 +1,6 @@
 # React Native Local Authentication
 
-The library helps you to authenticate users biometrically natively on both iOS and Android devices.
+The library helps you to authenticate users biometrically natively on both iOS and Android devices. For iOS LocalAuthentication Framework is used, and for android: `androidx.biometric:biometric` framework (BiometricPrompt, BiometricManager)
 
 Inspired by [react-native-fingerprint-scanner](https://github.com/hieuvp/react-native-fingerprint-scanner) and Android [BiometricPrompt](https://developer.android.com/reference/androidx/biometric/BiometricPrompt.html) class that manages a system-provided biometric prompt.
 
@@ -28,17 +28,7 @@ Read [Getting Started Guide](docs/Getting-Started.md). If any step seems unclear
 
 **Breaking History:**
 
-- 0.0.1 - iOS authorization
-- 0.0.4 - Android authorization
-
-**Upcoming:**
-
-- [ ] documentation
-  - [ ] android installation details
-  - [ ] ios examples
-  - [ ] android examples
-
-- [ ] may be check faceID permissions
+- 1.0.0 - first release
 
 ## Usage
 
