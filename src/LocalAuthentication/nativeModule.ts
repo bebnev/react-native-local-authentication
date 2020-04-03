@@ -7,7 +7,7 @@ import {
 const LocalAuthentication: LocalAuthenticationNativeModule = NativeModules.RNLocalAuthentication;
 
 if (!LocalAuthentication) {
-    throw new Error('bebnev/rn-local-authentication: NativeModule.RNDeviceInfo is null');
+    throw new Error('bebnev/rn-local-authentication: NativeModule.RNLocalAuthentication is null');
 }
 
 export default LocalAuthentication;
