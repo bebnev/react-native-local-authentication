@@ -1,6 +1,6 @@
 {
   "name": "rn-local-authentication",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "The library helps you to authenticate users biometrically",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
