@@ -9,6 +9,7 @@ This reference lays out the current public methods for the React Native LocalAut
 - [`getBiometryStatusAsync`](Api-Reference.md#getbiometrystatusasync)
 - [`getBiometryType`](Api-Reference.md#getbiometrytype)
 - [`authenticateAsync`](Api-Reference.md#authenticateasync)
+- [`isReuseAvailable`](Api-Reference.md#isreuseavailable)
 
 ## Utilities
 
@@ -234,6 +235,17 @@ const authenticationStatus = await LocalAuthentication.authenticateAsync({
 
 ```
 
+#### `isReuseAvailable()`
+
+Checks if reuse functions are available. This check only works for ios 9.0+ and only for touch id devices.
+
+This method is synchronous.
+
+```javascript
+
+LocalAuthentication.isReuseAvailable(): boolean;
+
+```
 
 ## Utilities
 
