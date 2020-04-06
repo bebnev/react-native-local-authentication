@@ -254,17 +254,27 @@ RCT_EXPORT_METHOD(authenticateAsync:(NSDictionary *)options
     return _biometryType;
 }
 
-- (BOOL)isDeviceWithFaceID {
+- (BOOL)isDeviceWithFaceID
+{
     return [self biometryType] == RNLocalAuthenticationBiometryFaceID;
 }
 
-- (BOOL)isDeviceWithTouchID {
+- (BOOL)isDeviceWithTouchID
+{
     return [self biometryType] == RNLocalAuthenticationBiometryTouchID;
 }
 
 - (NSDictionary *)constantsToExport
 {
-  return @{ @"biometryType": [NSNumber numberWithInteger:[self biometryType]] };
+    BOOL isReuseAvailable = false;
+    
+    if (@available(iOS 9, *)) {
+        isReuseAvailable = [self isDeviceWithTouchID];
+    } else {
+        isReuseAvailable = false;
+    }
+    
+    return @{ @"biometryType": [NSNumber numberWithInteger:[self biometryType]], @"isReuseAvailable":[NSNumber numberWithBool:isReuseAvailable] };
 }
 
 @end

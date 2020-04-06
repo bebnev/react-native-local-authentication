@@ -42,6 +42,11 @@ export interface LocalAuthenticationNativeModuleIOS extends LocalAuthenticationN
      * Type of the biometry available on device
      */
     biometryType: BiometryTypeIOSEnum;
+
+    /**
+     * Flag that indicates whether reuse is available with Touch ID
+     */
+    isReuseAvailable: boolean;
 }
 
 export type LocalAuthenticationNativeModule = LocalAuthenticationNativeModuleIOS & LocalAuthenticationNativeModuleAndroid;
@@ -86,4 +91,11 @@ export interface LocalAuthenticationInterface {
      * Release memory
      */
     release: () => void;
+
+    /**
+     * Check if reuse is available on the device
+     *
+     * @returns boolean
+     */
+    isReuseAvailable: () => boolean
 }
