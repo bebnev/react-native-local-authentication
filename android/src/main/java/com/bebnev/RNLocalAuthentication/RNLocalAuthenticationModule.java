@@ -154,7 +154,12 @@ public class RNLocalAuthenticationModule extends ReactContextBaseJavaModule {
                 new Runnable() {
                     @Override
                     public void run() {
-                        biometricPrompt.authenticate(promptInfo);
+                        try {
+                            biometricPrompt.authenticate(promptInfo);
+                        } catch (Exception e) {
+                            p.reject("AuthenticationFailed", e);
+                        }
+
                     }
                 }
         );
