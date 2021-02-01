@@ -160,6 +160,7 @@ public class RNLocalAuthenticationModule extends ReactContextBaseJavaModule {
                             if (biometricPrompt != null) {
                                 biometricPrompt.cancelAuthentication();
                             }
+                            release();
                             p.reject("AuthenticationFailed", e);
                             return;
                         }
