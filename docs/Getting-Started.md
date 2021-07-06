@@ -36,11 +36,28 @@ react-native link rn-local-authentication
 
 **Important**
 
+IOS
+
 Include the `NSFaceIDUsageDescription` key in your app’s `Info.plist` file if your app allows biometric authentication. Otherwise, authorization requests may fail.
+
+Android
+
+Add these permissions to AndroidManifest.xml
+
+```sh
+<uses-permission android:name="android.permission.USE_BIOMETRIC" />
+<uses-permission android:name="android.permission.USE_FINGERPRINT" />
+```
+
+Add following to app/src/build.gradle
+
+```sh
+implementation "androidx.biometric:biometric:1.1.0"
+```
 
 4. Import `LocalAuthentication` into your component
 
-Minimal example with `ios`:
+Minimal example with `ios & android`:
 
 ```javascript
 
@@ -66,9 +83,5 @@ class MyComponent extends React.Component {
 }
 
 ```
-
-Minimal example with `android`:
-
-*missing android*
 
 Next, check out [Api Reference](Api-Reference.md)
